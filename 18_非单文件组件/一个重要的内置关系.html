@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>一个重要的内置关系</title>
+    <!-- 引入Vue -->
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+<school></school>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+    Vue.prototype.x = 123
+    const school = Vue.extend({
+        // el: '#root', //组件定义时，一定不要写el配置项，因为最终所有组件都要被一个vm管理，由vm决定服务与哪个部分。
+        template: `
+        <div>
+            <h2>学校名：{{schoolName}}</h2>
+            <h2>学校地址：{{address}}</h2>
+            <button @click="showName">点我提示学校名</button>
+            <button @click="showX">点我显示x</button>
+        </div>
+        `,
+        data() {
+            return {
+                schoolName: 'USTS',
+                address: 'Suzhou',
+            }
+        },
+        methods: {
+            showName() {
+                alert(this.schoolName);
+            },
+            showX(){
+                console.log(this.x);
+            }
+        },
+    });
+    const vm = new Vue({
+        el: '#root',
+        components:{
+            school
+        }
+    });
+    console.log(school.prototype.__proto__ === Vue.prototype);
+</script>
+
+</html>

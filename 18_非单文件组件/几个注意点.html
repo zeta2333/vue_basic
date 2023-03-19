@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>几个注意点</title>
+    <!-- 引入Vue -->
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h2>{{msg}}</h2>
+        <my-school></my-school>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+    // 创建组件-简写
+    const school = {
+        template: `
+        <div>
+            <h2>{{name}}</h2>
+        </div>
+        `,
+        name:'xue-xiao',
+        data() {
+            return {
+                name: 'Pycro'
+            }
+        },
+    }
+    new Vue({
+        el: '#root',
+        data: {
+            msg: '欢迎学习Vue!',
+        },
+        components: {
+            // 'my-school':school
+            MySchool: school,
+        }
+    });
+</script>
+
+</html>

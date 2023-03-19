@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>列表排序</title>
+    <!-- 引入Vue -->
+    <script src="../js/vue.js"></script>
+    <style>
+        body,
+        body * {
+            padding: 15px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <button @click="updateMDM">点击更新马冬梅的信息</button>
+        <ul>
+            <li v-for="p in personArr" :key="p.id">
+                {{p.name}}-{{p.age}}--{{p.gender}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+
+    const vm = new Vue({
+        el: '#root',
+        data: {            
+            personArr: [
+                {
+                    id: '001',
+                    name: '马冬梅',
+                    age: 30,
+                    gender: '女'
+                },
+                {
+                    id: '002',
+                    name: '周冬雨',
+                    age: 31,
+                    gender: '女'
+                },
+                {
+                    id: '003',
+                    name: '周杰伦',
+                    age: 22,
+                    gender: '男'
+                },
+                {
+                    id: '004',
+                    name: '温兆伦',
+                    age: 19,
+                    gender: '男'
+                },
+            ],
+        },
+        methods: {
+            updateMDM() {
+                // this.personArr[0].name = "马老师";  //奏效   
+                // this.personArr[0].age = 69; //奏效   
+                // this.personArr[0].gender= "男"; //奏效   
+                this.personArr[0] = {
+                    id: '001',
+                    name: '马老师',
+                    age: 69,
+                    gender: '男'
+                } //单纯修改personArr的元素，Vue检测不到，所以页面不会刷新
+            }
+        },
+    });
+</script>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>VueComponent</title>
+    <!-- 引入Vue -->
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <hello></hello>
+        <school></school>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+    //定义school组件
+    const school = Vue.extend({
+        template: `
+        <div>
+            <h2>学校名称：{{name}}</h2>
+            <h2>学校地址：{{address}}</h2>          
+        </div>
+        `,
+        data() {
+            return {
+                name: 'USTS',
+                address: 'Suzhou',
+            }
+        },
+        mounted() {
+            console.log("school组件挂载完毕");
+            console.log(this);
+            console.log(this.name);
+        },
+    });
+
+    const test = Vue.extend({
+        template: `<span>Test</span>`
+    })
+
+    const hello = Vue.extend({
+        template: `<div>
+            <h2>{{msg}}</h2>
+            <test></test>
+            </div>`,
+        data() {
+            return {
+                msg: 'Hello!'
+            }
+        },
+        components: { test }
+    });
+
+    console.log('@', school);
+    console.log('#', hello);
+
+    const vm = new Vue({
+        el: '#root',
+        components: { school, hello }
+    });
+</script>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>v-text指令</title>
+    <!-- 引入Vue -->
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h2>{{name}}</h2>
+        <h2 v-text="name"></h2>
+        <h2 v-text="name">hello,</h2>
+        <h2 v-text="tag"></h2>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            name: 'Pycro',
+            tag: '<h1>Title</h1>',
+        }
+    });
+</script>
+
+</html>

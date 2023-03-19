@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令_函数</title>
+    <!-- 引入Vue -->
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h2>当前n的值为:<span v-text="n"></span></h2>
+        <h2>放大后n的值为:<span v-enlarge="n"></span></h2>
+        <button @click="n++">点击n+1</button>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            n: 1,
+        },
+        directives: {
+            // 函数什么时候被调用？1.指令与元素绑定时（初始化）2.指令所在的模板被重新解析时。
+            enlarge(ele, binding) {
+                console.log("enlarge called");
+                ele.innerText = binding.value * 10
+            }
+        }
+    });
+</script>
+
+</html>

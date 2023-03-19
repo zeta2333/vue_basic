@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>总结生命周期</title>
+    <!-- 引入Vue -->
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h2 :style="{opacity}" @mouseover="flag = !flag;">欢迎学习Vue</h2>
+        <button @click="opacity = 1">透明度设置为1</button>
+        <button @click="stop">点击停止变换</button>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            flag: false,
+            opacity: 1,
+        },
+        methods: {
+            stop() {
+                // clearInterval(this.timer);
+                this.$destroy();
+            }
+        },
+        //Vue模板解析完毕并在页面初始化真实DOM完成（挂载完毕）时，调用mounted函数
+        mounted() {
+            console.log("mounted called");
+            this.timer = setInterval(() => {
+                vm.opacity -= 0.01;
+                if (vm.opacity <= 0) vm.opacity = 1;
+            }, 16);
+        },
+        beforeDestroy() {
+            console.log("vm即将被销毁");
+            clearInterval(this.timer);
+        },
+    });
+
+
+</script>
+
+</html>

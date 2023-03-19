@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>el与data的两种写法</title>
+    <!-- 引入Vue -->
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h1>你好,{{name}}</h1>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+
+    //el的两种写法
+    // const v = new Vue({
+    //     //el: '#root',  //第一种写法
+    //     data: {
+    //         name: 'Pycro',
+    //     }
+    // });
+    // console.log(v);
+    // //1秒后关联
+    // setTimeout(() => {
+    //     v.$mount('#root'); // 第二种写法
+    // }, 1000);
+
+    //data的两种写法
+    new Vue({
+        el: '#root',
+
+        //data的第一种写法：对象式
+        // data:{
+        //     name:'Pycro',
+        // }
+
+        //data的第二种写法：函数式
+        data() { // 由data:function()简写而成
+            console.log("@@", this);//此处的this是Vue实例对象
+            return {
+                name: "Pycro",
+            }
+        }
+        // data: () => {
+        //     console.log("@@", this);//此处的this是全局对象Window
+        //     return {
+        //         name: "Pycro",
+        //     }
+        // }
+    });
+</script>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>引出生命周期</title>
+    <!-- 引入Vue -->
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h2 v-if="flag">Hello</h2>        
+        <!-- ":"绑定,属性用对象{k:v}形式表示 -->
+        <h2 :style="{opacity}" @mouseover="flag = !flag;">欢迎学习Vue</h2>
+        <!-- 调用一次change()方法 -->
+        <!-- <span v-once>{{change()}}</span> -->
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            flag:false,
+            opacity: 1,
+        },
+        methods: {
+            // change() {
+            //     console.log("change called");
+            //     setInterval(() => {
+            //         vm.opacity -= 0.01;
+            //         if (vm.opacity <= 0) vm.opacity = 1;
+            //     }, 16);
+            // }
+        },
+        //Vue模板解析完毕并在页面初始化真实DOM完成（挂载完毕）时，调用mounted函数
+        mounted() {
+            console.log("mounted called");
+            setInterval(() => {
+                vm.opacity -= 0.01;
+                if (vm.opacity <= 0) vm.opacity = 1;
+            }, 16);
+        },
+    });
+
+    //外部定时器（不推荐）
+    // setInterval(() => {
+    //     vm.opacity -= 0.01;
+    //     if (vm.opacity <= 0) vm.opacity = 1;
+    // }, 16);
+</script>
+
+</html>

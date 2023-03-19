@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>成绩计算</title>
+    <!-- 引入Vue -->
+    <script src="../js/vue.js"></script>
+    <style>
+        * {
+            font-size: 20px;
+        }
+
+        body {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        数学:<input type="text" v-model="math" placeholder="输入数学成绩"><br><br>
+        物理:<input type="text" v-model="physics" placeholder="输入物理成绩"><br><br>
+        化学:<input type="text" v-model="chemistry" placeholder="输入化学成绩"><br><br>
+        <button @click="calc">点击计算</button>
+        <h2>总分:{{totalScore}}</h2>
+        <h2>平均分:{{avgScore}}</h2>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            math: 0,
+            physics: 0,
+            chemistry: 0,
+            totalScore: 0,
+            avgScore: 0
+        },
+        // computed: {
+        //     totalScore() {
+        //         return Number(this.math) + Number(this.physics) + Number(this.chemistry);
+        //     },
+        //     avgScore() {
+        //         return Math.round(this.totalScore / 3);
+        //     }
+        // },
+        methods: {
+            calc() {
+                this.totalScore = Number(this.math) + Number(this.physics) + Number(this.chemistry);
+                this.avgScore = Math.round(this.totalScore / 3);
+            }
+        }
+    });
+</script>
+
+</html>
